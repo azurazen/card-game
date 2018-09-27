@@ -7,7 +7,7 @@ var database = require('./database/aladdin.js')
 server.listen(80);
 console.log("Server is Listening...");
 
-app.use(express.static(__dirname+'/'));
+app.use(express.static(__dirname+'/app/'));
 
 io.on('connection', function (socket) {
     console.log("New Connection to server.. Id :: "+socket.id);
