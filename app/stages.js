@@ -1,5 +1,5 @@
 let Stage = {
-    widgets : [loginWindow],
+    widgets : [loginWindow,lobbyWindow],
 
     init : function() {
         let stage = this;
@@ -35,20 +35,14 @@ let Intro = function() {
 };
 
 let Lobby = function() {
-    this.widgets = [];
+    this.widgets = [lobbyWindow];
     
     this.preload = () =>{
             Stage.set(this);
-            game.load.image("background","assets/ui/lobby.png");
             
     }
     this.create = () =>{
             game.input.mouse.capture = true;
-
-            var background = game.add.sprite(0, 0 ,'background');
-            background.height = window.innerHeight;
-            background.width = swindow.innerWidth;
-            console.log(window.innerWidth);
     }
     this.render = () =>{
 

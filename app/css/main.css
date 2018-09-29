@@ -1,5 +1,127 @@
-#game{
-    position: relative; 
-    overflow:hidden; 
-    display:inline-block;
+/* line 1, C:/Users/micha/OneDrive/Webdev/card-game/scss/main.scss */
+#game {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
 }
+
+/* line 1, C:/Users/micha/OneDrive/Webdev/card-game/scss/_loginWindow.scss */
+#loginWindow {
+  display: none;
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  padding: 0.5em;
+  background-color: lightgray;
+  border-radius: 8px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 30%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* line 19, C:/Users/micha/OneDrive/Webdev/card-game/scss/_loginWindow.scss */
+#loginForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 50%;
+}
+
+/* line 1, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+#lobbyWindow {
+  display: none;
+  position: absolute;
+  width: 95%;
+  height: 87%;
+  padding: 0.5em;
+  background-color: lightgray;
+  border-radius: 8px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  top: 5%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 19, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+#lobbyContainerDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 27, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyBorder {
+  border-style: solid;
+  border-width: 2px;
+  border-color: gray;
+  border-radius: 0px;
+}
+
+/* line 34, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyTAreaDiv {
+  width: 40%;
+  height: 90%;
+  margin: 0%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* line 42, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyRoomBtn {
+  width: 100%;
+}
+
+/* line 46, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyRoomsContainerDiv {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* line 56, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyTArea {
+  width: 100%;
+  height: 90%;
+  margin: 0%;
+  resize: none;
+}
+
+/* line 65, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyTAreaNames {
+  background-color: darkgrey;
+  text-align: center;
+  padding: 5px;
+  margin: 0;
+  height: 5%;
+}
+
+/* line 74, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+.lobbyChat {
+  width: 100%;
+  height: 90%;
+}
+
+/* line 79, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+#lobbyChatTField {
+  width: 100%;
+}
+
+/* line 83, C:/Users/micha/OneDrive/Webdev/card-game/scss/_lobbyWindow.scss */
+#lobbyExitDiv {
+  text-align: right;
+}
+
+/*# sourceMappingURL=../app/css/main.map */
