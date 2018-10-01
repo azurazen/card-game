@@ -29,6 +29,11 @@ io.on('connection', function (socket) {
         }
     });
 
+    socket.on('newMsg',function(msg){
+        Lobby.chatlog.push(socket.player.username+" : "+msg);
+        io.emit('newMsg',socket.player.username+" : "+msg);
+    });
+
     socket.on('reqNewRoom',async function(roomName){
         var containsRoom = false;
         Lobby.room.forEach(element => {

@@ -14,8 +14,13 @@ Client.askNewPlayer = function(user,pswd){
     console.log('connected!');
     Client.player = playerData;
     Client.lobby = lobbyData;
+    lobbyWindow.setChat(lobbyData.chatlog);
     lobbyWindow.setRoom(lobbyData.room);
     game.state.start('Lobby');
+  });
+
+  Client.socket.on('newMsg',function(msg){
+    lobbyWindow.recMsg(msg);
   });
 
   Client.socket.on("newRoom",function(room){

@@ -30,7 +30,6 @@ let lobbyWindow = {
     id:"#lobbyWindow",
     data : {room:[],chatlog:[]},
     init : function (){
-        //this.data = {rooms:[],chatlog:[]}
         room=[];
 
         // Div Definitions
@@ -38,7 +37,7 @@ let lobbyWindow = {
         var $exitDiv      = $("<div>",{id:"lobbyExitDiv", class:"lobbyTAreaNames lobbyBorder"});
         var $iconBarDiv   = $("<div>",{id:"lobbyIconBarDiv"});
         var $containerDiv = $("<div>",{id:"lobbyContainerDiv"});
-        var $friendsDiv   = $("<div>",{id:"lobbyFriendsDiv", class:"lobbyTAreaDiv"});
+        //var $friendsDiv   = $("<div>",{id:"lobbyFriendsDiv", class:"lobbyTAreaDiv"});
         var $chatDiv      = $("<div>",{id:"lobbyChatDiv", class:"lobbyTAreaDiv lobbyChat"});
         var $roomsDiv     = $("<div>",{id:"lobbyRoomsDiv", class:"lobbyTAreaDiv"});
 
@@ -58,40 +57,60 @@ let lobbyWindow = {
         var $guildButton = $("<button/>",{id:"lobbyGuildButton", text:"guild", click: function(){
             // Guild
         } });
-        var $newRoomButton = $("<button/>",{id:"lobbyNewRoomButton", text:"New Room", click: function(){
-            // New Room
-            if($("#lobbyNewRoomTField").val().replace(/\s/g, '')!=""){
-                //lobbyWindow.addRoom({name:$("#lobbyNewRoomTField").val()});
-                lobbyWindow.reqRoom($("#lobbyNewRoomTField").val());
-            }
-            $("#lobbyNewRoomTField").val("");
-        } });
 
         // Para Definitions
-        var $friendsPara = $("<p/>",{id:"lobbyFriendsPara", class:"lobbyTAreaNames lobbyBorder" , text:"Friends"});
+        //var $friendsPara = $("<p/>",{id:"lobbyFriendsPara", class:"lobbyTAreaNames lobbyBorder" , text:"Friends"});
         var $chatPara    = $("<p/>",{id:"lobbyChatPara", class:"lobbyTAreaNames lobbyBorder" , text:"Chat"});
         var $roomsPara   = $("<p/>",{id:"lobbyRoomsPara", class:"lobbyTAreaNames lobbyBorder" , text:"Rooms"});
 
         // Text Area Definitions
-        var $friendsTArea    = $("<textarea>",{id:"lobbyFriendsTArea", class:"lobbyTArea lobbyBorder"});
+        //var $friendsTArea    = $("<textarea>",{id:"lobbyFriendsTArea", class:"lobbyTArea lobbyBorder"});
         var $chatTArea    = $("<textarea>",{id:"lobbyChatTArea", class:"lobbyTArea lobbyChat lobbyBorder"});
-        //var $roomsTArea    = $("<textarea>",{id:"lobbyRoomsTArea", class:"lobbyTArea lobbyBorder"});
 
         // Room(s) Container Div
         var $roomsContainerDiv     = $("<div>",{id:"lobbyRoomsContainerDiv", class:"lobbyRoomsContainerDiv lobbyBorder"});
 
         // Chat Text Field Definition
-        var $chatTField    = $("<input>",{id:"lobbyChatTField", class:"lobbyBorder"});
-        var $newRoomTField = $("<input>",{id:"lobbyNewRoomTField", class:"lobbyBorder"});
+        //var $chatTField    = $("<input>",{id:"lobbyChatTField", class:"lobbyBorder"});
+        var $chatForm = $("<form>",{id:"lobbyChatForm"});
+        var $newRoomForm = $("<form>",{id:"lobbyNewRoomForm"});
+
+        $chatForm.append(
+            $("<label>",{ text:"Message: "}),
+            $("<input/>",{ id:"lobbyChatInput", type:"text", value:"", placeholder:""}),
+            $("<input/>",{ type:"submit", value:"Submit"})
+        );
+        $chatForm.submit(function(event){
+            event.preventDefault();
+            // New Room
+            if($("#lobbyChatInput").val().replace(/\s/g, '')!=""){
+                lobbyWindow.sendMsg($("#lobbyChatInput").val());
+            }
+            $("#lobbyChatInput").val("");
+        });
+
+        $newRoomForm.append(
+            $("<label>",{ text:"Create New Room"}),
+            $("<input/>",{ id:"newRoomInput", type:"text", value:"", placeholder:""}),
+            $("<input/>",{ type:"submit", value:"Submit"})
+        );
+        $newRoomForm.submit(function(event){
+            event.preventDefault();
+            // New Room
+            if($("#newRoomInput").val().replace(/\s/g, '')!=""){
+                lobbyWindow.reqRoom($("#newRoomInput").val());
+            }
+            $("#newRoomInput").val("");
+        });
 
         // Setup Divs
         $exitDiv.append($exitButton);
         $iconBarDiv.append($shopButton,$buildButton,$mailButton,$guildButton);
-        $friendsDiv.append($friendsPara,$friendsTArea);
-        $chatDiv.append($chatPara,$chatTArea,$chatTField);
-        $roomsDiv.append($roomsPara,$roomsContainerDiv,$newRoomTField,$newRoomButton);
+        //$friendsDiv.append($friendsPara,$friendsTArea);
+        $chatDiv.append($chatPara,$chatTArea,$chatForm);//$chatTField);
+        $roomsDiv.append($roomsPara,$roomsContainerDiv,$newRoomForm);
 
-        $containerDiv.append($friendsDiv,$chatDiv,$roomsDiv);
+        $containerDiv.append($chatDiv,$roomsDiv);//$friendsDiv,$chatDiv,$roomsDiv);
 
         // Put it all together
         $div.append($exitDiv,$iconBarDiv,$containerDiv);
@@ -99,6 +118,19 @@ let lobbyWindow = {
         $("#game").append($div)
         
     },
+    setChat : function(pastchat){
+        pastchat.forEach(element => {
+            this.recMsg(element);
+        });
+        
+    },
+    sendMsg : function (msg){
+        Client.socket.emit("newMsg",msg);
+    },
+    recMsg : function (msg){
+        $("#lobbyChatTArea").val($("#lobbyChatTArea").val() + msg + "\n");
+    },
+
     reqRoom : function (roomName){
         Client.socket.emit("reqNewRoom",roomName);
     },
